@@ -1,9 +1,10 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import supabase from '../utils/supabase'
 
 function Messages() {
   const [messages, setMessages] = useState([])
+  const messagesRef = useRef(null);
 
   const fetchMessages = async () => {
     const { data } = await supabase
@@ -13,7 +14,12 @@ function Messages() {
       alert('no messages')
       return
     }
-    setMessages(data)
+    setMessages(data);
+
+    // scroll the content to the bottom on page load or when message is added
+    if(messagesRef.current){
+        messagesRef.current.scrollTop = messagesRef.current.scrollHeight
+    }
   }
 
   useEffect(() => {
@@ -38,8 +44,8 @@ function Messages() {
   const userId = supabase.auth.user()?.id
 
   return (
-    <div className="flex-1 overflow-scroll">
-      <ul className="flex flex-col items-stretch justify-end space-y-1 bg-slate-200 p-4">
+    <div className="flex-1 overflow-scroll bg-slate-100" ref={messagesRef} style={{scrollBehavior: 'smooth'}}>
+      <ul className="flex flex-col items-stretch justify-end space-y-1 p-4">
         {messages.map((message) => (
           <li
             key={message?.id}
