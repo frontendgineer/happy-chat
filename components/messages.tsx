@@ -1,17 +1,20 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import supabase from '../utils/supabase'
 
 function Messages() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([])
 
   const fetchMessages = async () => {
-    const { data } = await supabase.from('messages').select('*, profile: profiles(username)') //aliasing profilesto profile
+    const { data } = await supabase
+      .from('messages')
+      .select('*, profile: profiles(username)') //aliasing profilesto profile
     if (!data) {
       alert('no messages')
       return
     }
     setMessages(data)
-  };
+  }
 
   useEffect(() => {
     fetchMessages()
@@ -46,7 +49,9 @@ function Messages() {
                 : 'self-start rounded bg-red-400 px-2'
             }
           >
-            <span className="text-sm text-yellow-200">{message?.profile.username}</span>
+            <span className="text-sm text-yellow-200">
+              {message?.profile.username}
+            </span>
             <span className="block text-gray-100">{message?.content}</span>
           </li>
         ))}
