@@ -34,7 +34,7 @@ const Home: NextPage = () => {
 
       <main className="flex h-full w-full flex-1 flex-col items-stretch bg-blue-400 px-20">
         <div className="bg-pink-100">
-          <h1 className="bg-green-200 px-4 py-2 text-3xl">Happy Chat</h1>
+          <h1 className="bg-orange-200 px-4 py-2 text-3xl">Happy Chat</h1>
         </div>
         <Messages />
         <form onSubmit={handleSubmit} className="bg-yellow-400 p-2">
