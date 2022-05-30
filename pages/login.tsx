@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { Input, Button } from '@supabase/ui'
 import supabase from '../utils/supabase'
